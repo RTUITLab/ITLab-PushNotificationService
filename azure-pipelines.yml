@@ -36,8 +36,8 @@ stages:
 - stage: Build
   displayName: Build image
   jobs:
-  - job: Build
-    displayName: Build
+  - job: Public
+    displayName: Public docker build
     pool:
       vmImage: ubuntu-latest
     steps:
@@ -50,6 +50,12 @@ stages:
         Dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
         buildContext: '$(Build.SourcesDirectory)'
         tags: ${{variables.imageTags}}
+  
+  - job: Private
+    displayName: Private docker build
+    pool:
+      vmImage: ubuntu-latest
+    steps:
     - task: Docker@2
       displayName: Build image for private docker registry
       inputs:
