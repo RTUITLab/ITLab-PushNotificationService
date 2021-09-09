@@ -13,7 +13,7 @@ class WebSocketController {
 
     init(_ app: Application) {
 
-        app.webSocket("push", ":userId") { req, wSocket in
+        app.webSocket("ws", ":userId") { req, wSocket in
 
             if let userId = req.parameters.get("userId"), let uuid = UUID(uuidString: userId) {
                 wSocket.send("Connected")
